@@ -177,7 +177,7 @@
                 mensagem_erro.innerHTML = `<span style="color: green;">Cadastro realizado com sucesso! Redirecionando para tela de Login...</span>`;
 
                 setTimeout(() => {
-                    // window.location = "login.html";
+                    window.location = "cadastro.html";
                     transição()
                 }, "2000")
 
@@ -261,10 +261,10 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.TOKEN_USUARIO = json.token;
-                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
 
                     setTimeout(function () {
-                        window.location = "../dashboard/index.html";
+                        window.location = "../dashboard/dashboard.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
