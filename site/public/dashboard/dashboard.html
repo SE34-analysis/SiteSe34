@@ -499,8 +499,8 @@
     for (i = 0; i < resposta.length; i++) {
       var registro = resposta[i];
       labels.push(registro.momento_grafico);
-      dados.datasets[0].data.push(registro.umidade);
-      dados.datasets[1].data.push(registro.temperatura);
+      dados2.datasets[0].data.push(registro.umidade);
+      dados2.datasets[1].data.push(registro.temperatura);
     }
 
     console.log('----------------------------------------------')
@@ -514,7 +514,7 @@
     // Criando estrutura para plotar gráfico - config
     const config2 = {
       type: 'line',
-      data: dados,
+      data: dados2,
     };
 
     // Adicionando gráfico criado em div na tela
@@ -523,7 +523,7 @@
       config
     );
 
-    setTimeout(() => atualizarGrafico(token, dados, myChart,myChart2), 2000);
+    setTimeout(() => atualizarGrafico(token, dados, dados2, myChart, myChart2), 2000);
   }
 
 
@@ -532,7 +532,7 @@
 
   // // //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   // // //     Para ajustar o "select", ajuste o comando sql em src/models
-  function atualizarGrafico(token, dados, myChart,myChart2) {
+  function atualizarGrafico(token, dados, dados2, myChart, myChart2) {
 
 
 
@@ -592,7 +592,7 @@
 
           console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
           console.log(`Dados atuais do gráfico:`);
-          console.log(dados);
+          console.log(dados2);
 
           // let avisoCaptura = document.getElementById(`avisoCaptura${token}`)
 
@@ -608,25 +608,25 @@
             console.log("---------------------------------------------------------------")
           } else {
             // tirando e colocando valores no gráfico
-            dados.labels.shift(); // apagar o primeiro
-            dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+            dados2.labels.shift(); // apagar o primeiro
+            dados2.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
 
-            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-            dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
+            dados2.datasets[0].data.shift();  // apagar o primeiro de umidade
+            dados2.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
 
-            dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-            dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+            dados2.datasets[1].data.shift();  // apagar o primeiro de temperatura
+            dados2.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
 
-            myChart.update();
+            myChart2.update();
           }
 
           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados, myChart2), 2001);
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados2, myChart2), 2001);
         });
       } else {
         console.error('Nenhum dado encontrado ou erro na API');
         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados, myChart2), 2001);
+        proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados2, myChart2), 2001);
       }
     })
       .catch(function (error) {
