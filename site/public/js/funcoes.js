@@ -53,3 +53,20 @@ function fecharModal() {
     divModal.style.display = "none";
 }
 
+function caminhãoA1() {
+    sessionStorage.setItem('IDCAMINHAO', 50);
+    window.location = 'caminhao.html'
+}
+function caminhãoA2() {
+    sessionStorage.setItem('IDCAMINHAO', 51)
+    window.location = 'caminhao.html'
+}
+function caminhãoA3() {
+    sessionStorage.setItem('IDCAMINHAO', 52)
+    window.location = 'caminhao.html'
+}
+function caminhãoA4() {
+    sessionStorage.setItem('IDCAMINHAO', 53)
+    window.location = 'caminhao.html'
+}
+
