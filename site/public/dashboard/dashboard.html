@@ -28,6 +28,7 @@
 </head>
 
 <body>
+  <!-- onload="validarSessao()" -->
   <div class="header">
     <div class="container">
       <h1 class="icon1">
@@ -55,7 +56,7 @@
         </div>
       </div>
 
-      <li><a href="../index.html" onclick="limparSessao()"><b>Sair</b></a></li>
+      <li><a onclick="limparSessao()"><b>Sair</b></a></li>
         </div>
       </div>
     </div>
@@ -309,29 +310,29 @@
 
     verificar_autenticacao();
 
-    function alterarTitulo(token) {
-        var tituloAquario = document.getElementById(`tituloAquario${token}`)
-        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>Aquário " + token + "</span>"
-    }
+    // function alterarTitulo(token) {
+    //     var tituloAquario = document.getElementById(`tituloAquario${token}`)
+    //     tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>Aquário " + token + "</span>"
+    // }
 
-    function exibirAquario(token) {
-        let todosOsGraficos = document.getElementById("graficos")
+//     // function exibirAquario(token) {
+//     //     let todosOsGraficos = document.getElementById("graficos")
 
-        for (i = 1; i <= todosOsGraficos.childElementCount; i++) {
-            // exibindo - ou não - o gráfico
-            let elementoAtual = document.getElementById(`grafico${i}`)
-            if (elementoAtual.classList.contains("display-block")) {
-                elementoAtual.classList.remove("display-block")
-            }
-            elementoAtual.classList.add("display-none")
+//     //     for (i = 1; i <= todosOsGraficos.childElementCount; i++) {
+//     //         // exibindo - ou não - o gráfico
+//     //         let elementoAtual = document.getElementById(`grafico${i}`)
+//     //         if (elementoAtual.classList.contains("display-block")) {
+//     //             elementoAtual.classList.remove("display-block")
+//     //         }
+//     //         elementoAtual.classList.add("display-none")
             
-            // alterando estilo do botão
-            let btnAtual = document.getElementById(`btnAquario${i}`)
-            if (btnAtual.classList.contains("btn-pink")) {
-                btnAtual.classList.remove("btn-pink")
-            }
-            btnAtual.classList.add("btn-white")
-        }
+//     //         // alterando estilo do botão
+//     //         let btnAtual = document.getElementById(`btnAquario${i}`)
+//     //         if (btnAtual.classList.contains("btn-pink")) {
+//     //             btnAtual.classList.remove("btn-pink")
+//     //         }
+//     //         btnAtual.classList.add("btn-white")
+//     //     }
         
         // // exibindo - ou não - o gráfico
         // let graficoExibir = document.getElementById(`grafico${token}`)
@@ -342,7 +343,7 @@
         // let btnExibir = document.getElementById(`btnAquario${token}`)
         // btnExibir.classList.remove("btn-white")
         // btnExibir.classList.add("btn-pink")
-    }
+    // }
 
     // O gráfico é construído com três funções:
     // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
