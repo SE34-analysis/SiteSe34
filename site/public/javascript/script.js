@@ -51,3 +51,26 @@ pode causar perda de até <b>25%</b> na distribuição de salmão.
 De acordo com a sua transportação, você está suscetível a perder <b>R$${TotalPerda} Reais</b>.<br>`
     div_mensagem.innerHTML += `<br>Nós podemos te ajudar a evitar essa perda.<br><a href="Home.html#row"><b>Entre em contato conosco.</b></a>`
 }
+
+var exibir_menu = false
+
+function mostrarmenu() {
+    if (exibir_menu == true) {
+        exibir_menu = false
+        child_dropdown.style.display = 'none'
+    } else {
+        exibir_menu = true
+        child_dropdown.style.display = 'block'
+    }
+}
+var exibir_caminhao = false
+
+function mostrartrucks() {
+    if (exibir_caminhao == true) {
+        exibir_caminhao = false
+        caminhaoes.style.display = 'none'
+    } else {
+        exibir_caminhao = true
+        caminhaoes.style.display = 'block'
+    }
+}

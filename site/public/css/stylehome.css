@@ -82,7 +82,7 @@ body {
     border: #ffffff solid 2px;
     position: absolute;
     left: -100%;
-    top: 60%;
+    top: 102%;
 }
 .dropdown a {
     color: rgb(255, 255, 255);
@@ -187,8 +187,7 @@ h1 {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    font-size: 14px;
+    padding: 10px 10px;
     /* box-shadow: 3px 0px 3px #000000; */
 }
 
@@ -206,6 +205,7 @@ h1 {
 
 .card1 p {
     text-align: center;
+    font-size: 15px;
 }
 
 .container .card1 {
@@ -215,7 +215,7 @@ h1 {
     display: flex;
     flex-direction: column;
     padding: 50px;
-    font-size: 14px;
+    font-size: 15px;
     align-items: center;
     margin-bottom: 20px;
 }
@@ -364,7 +364,7 @@ img {
 /* FIM BANNER SLIDE */
 
 .BG_size{
-    height: 780px;
+    height: 450px;
 }
 p {
     font-size: 13px;

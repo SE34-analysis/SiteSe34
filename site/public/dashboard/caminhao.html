@@ -12,6 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
   <link rel="stylesheet" href="style.css">
+  <script src="../javascript/script.js"></script>
   <script src="../js/funcoes.js"></script>
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -33,39 +34,26 @@
         <a href="dashboard.html"> <img class="img1" src="../assets/img/SE34-2.png"></a>
       </h1>
       <div class="navbar">
-        <a href="dashboard.html">
-          <li><img width="30px" height="30px" src="../assets/img/home_FILL0_wght400_GRAD0_opsz48.png" alt="">
-          </li>
-        </a>
         <div class="hello">
           <h3> <span id="b_usuario" style="font-size: 20px;">usuário</span></h3>
         </div>
         <!-- <div class="perfil"></div> -->
-
-        <!-- <div class="dropdown">
-          <button class="mainmenubtn"><img src='../assets/img/perfil-de-usuario (1).png' height="60px"
-              width="60px"></button>
-          <div class="dropdown-child">
-            <a href="caminhao1.html" style="color: red;"> Caminhão A1</a>
-            <a href="caminhao.html" style="color: #ff7b00;">Caminhão A2</a>
-            <a href="caminhao3.html" style="color: green;">Caminhão A3</a>
-            <a href="caminhao4.html" style="color: green;">Caminhão A4</a>
-          </div>
-        </div> -->
-
+        <a href="dashboard.html">
+          <img width="35px" height="35px" src="../assets/img/home_FILL0_wght400_GRAD0_opsz48.png" alt="">
+         </a>
         <div class="dropdown">
-          <button id="icone" class="dropbtn"><img src='../assets/img/perfil-de-usuario (1).png' height="60px"
-            width="60px">
-            <div class="dropdown-content">
-              <a onclick="caminhãoA1()" style="color: red;"> Caminhão A1</a>
-              <a onclick="caminhãoA2()" style="color: #ff7b00;">Caminhão A2</a>
-              <a onclick="caminhãoA3()" style="color: green;">Caminhão A3</a>
-              <a onclick="caminhãoA4()" style="color: green;">Caminhão A4</a>
-          </div>
-          </div>
+          <button class="dropbtn" onclick="mostrartrucks()"><img
+            src='../assets/img/perfil-de-usuario (1).png' height="40px" width="40px" /></button>
+            <div class="dropdown-content" id="caminhaoes">
+              <a href="caminhao.html" onclick="caminhãoA1()" style="color: red;"> Caminhão A1</a>
+              <a href="caminhao.html" onclick="caminhãoA2()" style="color: #ff7b00;">Caminhão A2</a>
+              <a href="caminhao.html" onclick="caminhãoA3()" style="color: green;">Caminhão A3</a>
+              <a href="caminhao.html" onclick="caminhãoA4()" style="color: green;">Caminhão A4</a>
+            </div>
         </div>
 
-        <li><a href="../index.html" onclick="limparSessao()"><b>Sair</b></a></li>
+         <a onclick="limparSessao()"><img src="https://cdn-icons-png.flaticon.com/512/126/126467.png" alt="" height="31px"></a>
+       </div>
       </div>
     </div>
   </div>

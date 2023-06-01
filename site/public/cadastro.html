@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Se34 - Cadastro</title>
    <script src="js/funcoes.js"></script>
+   <script src="javascript/script.js"></script>
 
     <link rel="stylesheet" href="css/styleCadastro.css">
     <link rel="shortcut icon" href="assets/img/SE34-1.png" type="image/x-icon">
@@ -27,11 +28,10 @@
             <li><a href="cadastro.html">Acessar</a></li>
 
             <div class="dropdown">
-                <button class="mainmenubtn"><img
-                        src='assets/img/menu_FILL0_wght400_GRAD0_opsz48.png'
-                        height="30px" width="30px"></button>
-                <div class="dropdown-child">
-                    <a href="index.html#sobrenos">Sobre Nós</a>
+                <button class="mainmenubtn" onclick="mostrarmenu()"><img
+                        src='./assets/img/menu_FILL0_wght400_GRAD0_opsz48.png' height="30px" width="30px" /></button>
+                <div class="dropdown-child" id="child_dropdown">
+                    <a href="#sobrenos">Sobre Nós</a>
                     <a href="Contato.html">Contato</a>
                     <a href="simulador.html">Calculadora Financeira</a>
                 </div>
