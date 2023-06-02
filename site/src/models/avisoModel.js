@@ -8,7 +8,7 @@ function listar() {
             a.titulo,
             a.descricao,
             a.fk_usuario,
-            u.id AS idUsuario,
+            u.id AS token,
             u.nome,
             u.email,
             u.senha
@@ -28,7 +28,7 @@ function pesquisarDescricao(texto) {
             a.titulo,
             a.descricao,
             a.fk_usuario,
-            u.id AS idUsuario,
+            u.id AS token,
             u.nome,
             u.email,
             u.senha
@@ -41,7 +41,7 @@ function pesquisarDescricao(texto) {
     return database.executar(instrucao);
 }
 
-function listarPorUsuario(idUsuario) {
+function listarPorUsuario(token) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario()");
     var instrucao = `
         SELECT 
@@ -49,23 +49,23 @@ function listarPorUsuario(idUsuario) {
             a.titulo,
             a.descricao,
             a.fk_usuario,
-            u.id AS idUsuario,
+            u.id AS token,
             u.nome,
             u.email,
             u.senha
         FROM aviso a
             INNER JOIN usuario u
                 ON a.fk_usuario = u.id
-        WHERE u.id = ${idUsuario};
+        WHERE u.id = ${token};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function publicar(titulo, descricao, idUsuario) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao, idUsuario);
+function publicar(titulo, descricao, token) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao, token);
     var instrucao = `
-        INSERT INTO aviso (titulo, descricao, fk_usuario) VALUES ('${titulo}', '${descricao}', ${idUsuario});
+        INSERT INTO aviso (titulo, descricao, fk_usuario) VALUES ('${titulo}', '${descricao}', ${token});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
