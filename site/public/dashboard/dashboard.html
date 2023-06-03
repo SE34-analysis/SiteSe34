@@ -12,6 +12,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
   <link rel="stylesheet" href="style.css">
+  <script src="alerta.js"></script>
+  <link rel="stylesheet" href="alert.css">
   <link rel="stylesheet" href="dashboards.css">
   <script src="../javascript/script.js"></script>
 
@@ -29,7 +31,7 @@
   <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="">
+<body onload="validarSessao()">
   <!-- ; validarSessao() -->
   <div class="header">
     <div class="container">
@@ -65,23 +67,24 @@
 
 
   <div class="body1">
-
+    <div id="alerta"></div>
+    <div id="alerta2"></div>
     <div class="esquerda">
       <div class="separa">
         <div class="box_kpi ao_redor">
           <div class=" titulokpi">
             Temperatura Atual
           </div>
-          <span id="kpiTemperaturaBase" class="kpi">
-            0°C
+          <span class="kpi " id="card_temp" >
+            - 5°C
           </span>
         </div>
         <div class="box_kpi ao_redor">
-          <div class=" titulokpi">
+          <div class=" titulokpi" >
             Umidade Atual
           </div>
-          <span id="kpiUmidadeBase" class="kpi">
-            0%
+          <span class="kpi" id="card_umi">
+            80%
           </span>
         </div>
 
@@ -159,7 +162,7 @@
 </body>
 
 </html>
-<script>
+ <script>
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
   token = sessionStorage.TOKEN_USUARIO;
 
@@ -168,9 +171,11 @@
   Chart.defaults.font.family = 'Times New Roman';
   Chart.defaults.font.size = 16;
 
-  buscarQtdCaminhao();
-  buscarStatSensor();
-  buscarTipoCaminhao();
+  // buscarQtdCaminhao();
+  // buscarStatSensor();
+  // buscarTipoCaminhao();
+
+  window.onload = atualizacaoPeriodica();
 
   // const ctx = document.getElementById('myChart1');
 
@@ -555,7 +560,7 @@
       config
     );
 
-    setTimeout(() => atualizarGrafico(token, dados, dados2, myChart, myChart2), 10000);
+    setTimeout(() => atualizarGrafico(token, dados, dados2, myChart, myChart2), 1000);
   }
 
 
@@ -605,12 +610,12 @@
           }
 
           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados, myChart), 10000);
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados, myChart), 2000);
         });
       } else {
         console.error('Nenhum dado encontrado ou erro na API');
         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados, myChart), 10000);
+        proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados, myChart), 2000);
       }
     })
       .catch(function (error) {
@@ -735,50 +740,52 @@
 
     return false;
   }
-  function buscarTipoCaminhao() {
-    // aguardar();
+  // function buscarTipoCaminhao() {
+  //   // aguardar();
 
-    fetch(`/medidas/tempo-real-1/${token}`
-    ).then(function (resposta) {
+  //   fetch(`/medidas/tempo-real-1/${token}`
+  //   ).then(function (resposta) {
 
-      if (resposta.ok) {
-        console.log(resposta);
+  //     if (resposta.ok) {
+  //       console.log(resposta);
 
-        resposta.json().then(json => {
-          console.log(json);
-          console.log(JSON.stringify(json));
+  //       resposta.json().then(json => {
+  //         console.log(json);
+  //         console.log(JSON.stringify(json));
 
-          sessionStorage.TIPOCAMINHAOGELO = json[0].tipoCaminhao;
-          sessionStorage.TIPOCAMINHAONITRO = json[1].tipoCaminhao;
+  //         sessionStorage.TIPOCAMINHAOGELO = json[0].tipoCaminhao;
+  //         sessionStorage.TIPOCAMINHAONITRO = json[1].tipoCaminhao;
 
-          plotar()
+  //         plotar()
 
-        });
+  //       });
 
-      } else {
+  //     } else {
 
-        console.log("Houve um erro ao tentar realizar o login!");
+  //       console.log("Houve um erro ao tentar realizar o login!");
 
-        resposta.text().then(texto => {
-          console.error(texto);
-          // finalizarAguardar(texto);
-        });
-      }
+  //       resposta.text().then(texto => {
+  //         console.error(texto);
+  //         // finalizarAguardar(texto);
+  //       });
+  //     }
 
-    }).catch(function (erro) {
-      console.log(erro);
-    })
+  //   }).catch(function (erro) {
+  //     console.log(erro);
+  //   })
 
-    return false;
-  }
+  //   return false;
+  // }
 
   function plotar() {
-    kpiQTD.innerHTML = sessionStorage.QTDCAMINHAO;
+    kpiQTD.innerHTML = sessionStorage.QTDCAMINHAO
 
-    plotarPizza1()
+  //   plotarPizza1()
 
-    plotarPizza2()
+  //   plotarPizza2()
+  // }
   }
+
 
 
 </script>
