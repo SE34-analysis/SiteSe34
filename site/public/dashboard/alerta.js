@@ -200,6 +200,7 @@ function alertar2(resposta, token) {
         exibirAlerta2(umi, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (umi <= limites.muito_frio) {
+       
         classe_umidade = 'cor-alerta perigo-seco';
         grauDeAviso = 'perigo-seco'
         grauDeAvisoCor = 'cor-alerta perigo-seco'
