@@ -23,13 +23,13 @@ rt * {
 /* Css Cabeçalho */
 .header {
     width: 100%;
-    height: 25px;
+    height: 4vh;
     background: rgb(89, 172, 254);
     background: linear-gradient(90deg, rgba(89, 172, 254, 1) 0%, rgba(15, 101, 187, 1) 100%);
     /* border-bottom: solid white 1px; */
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     justify-content: space-between;
     padding-bottom: 50px;
     box-shadow: 5px 0px 5px #000000;
@@ -38,7 +38,8 @@ rt * {
 .header .container {
     justify-content: space-between;
     align-items: center;
-   
+    display: flex;
+    flex-direction: row;
 }
 
 .icon1 {
@@ -78,13 +79,6 @@ rt * {
 
 
 }
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-
 .body1 {
     height: 100vh;
     width: 100%;
@@ -114,9 +108,9 @@ rt * {
     font-size: 20px;
   
 }
-.b3{
-    margin-top: 0;
-}
+/* .b3{
+    margin-top: 10px;
+} */
 
 .ao_redor {
     background-color: whitesmoke;
@@ -130,6 +124,11 @@ rt * {
     box-shadow: 5px 0px 5px #000000;
     opacity: 100%;
     overflow: hidden;
+}
+.ao_redor p {
+    font-size: 18px;
+    padding: 50px 0px 30px;
+    text-align: center;
 }
 
 .box_kpi {
