@@ -219,15 +219,15 @@
         var tokenVar = Number(token_input_login.value);
 
         if (emailVar == "" || senhaVar == "" || tokenVar == '') {
-            cardErro.style.display = "block"
+            // cardErro.style.display = "block"
             mensagem_erro.innerHTML = `<span style="color: red;">Mensagem de erro para todos os campos em branco</span>`;
-            finalizarAguardar();
+            // finalizarAguardar();
             return false;
         }
         else if (tokenVar < 2000) {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = `<span style="color: red;">CPF inválido </span> `;
-            finalizarAguardar();
+            // finalizarAguardar();
             return false;
         } 
         else {
