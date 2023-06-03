@@ -21,7 +21,7 @@ function limparSessao() {
     // aguardar();
     sessionStorage.clear();
     // finalizarAguardar();
-    window.location = "../cadastro.html";
+    window.location = "../Cadastro.html?#";
 }
 
 // carregamento (loading)

@@ -316,10 +316,34 @@
   }
 
   function AtualizarKPI(umidade, temperatura) {
+    var ArrayUmidade = [];
+    var ArreyTemperatura = [];
+    var umidadeMedia = 0;
+    var temperaturaMedia = 0;
+    
+    ArrayUmidade.push(umidade);
+    ArreyTemperatura.push(temperatura);
+    
+    var tamanho =  ArreyUmidade.length
+    if(tamanho > 7) {
+      ArrayUmidade.splice(tamanho-1, 1)
+      ArrayTemperatura.splice(tamanho-1, 1)
 
-    kpiUmidadeBase.innerHTML = `${umidade}%`;
+      tamanho =  ArreyUmidade.length
+      console.log(ArrayUmidade)
+    }
+ 
+    for(cont = 0; cont < tamanho; cont++){
+      umidadeMedia += ArreyUmidade[cont]
+      TemperaturaMedia += ArreyTemperatura[cont]
+    }
 
-    kpiTemperaturaBase.innerHTML = `${temperatura}°C`;
+    umidadeMedia = umidadeMedia / tamanho
+    temperaturaMedia = temperaturaMedia / tamanho
+
+    kpiUmidadeBase.innerHTML = `${umidadeMedia}%`;
+
+    kpiTemperaturaBase.innerHTML = `${temperaturaMedia}°C`;
   }
 
 
@@ -531,7 +555,7 @@
       config
     );
 
-    setTimeout(() => atualizarGrafico(token, dados, dados2, myChart, myChart2), 2000);
+    setTimeout(() => atualizarGrafico(token, dados, dados2, myChart, myChart2), 10000);
   }
 
 
@@ -581,12 +605,12 @@
           }
 
           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados, myChart), 2000);
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados, myChart), 10000);
         });
       } else {
         console.error('Nenhum dado encontrado ou erro na API');
         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados, myChart), 2000);
+        proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados, myChart), 10000);
       }
     })
       .catch(function (error) {
@@ -631,12 +655,12 @@
           }
 
           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados2, myChart2), 2001);
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados2, myChart2), 10001);
         });
       } else {
         console.error('Nenhum dado encontrado ou erro na API');
         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados2, myChart2), 2001);
+        proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados2, myChart2), 10001);
       }
     })
       .catch(function (error) {
