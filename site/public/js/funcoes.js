@@ -70,3 +70,26 @@ function caminhãoA4() {
     window.location = 'caminhao.html'
 }
 
+
+var exibir_menu = false
+
+function mostrarmenu() {
+    if (exibir_menu == true) {
+        exibir_menu = false
+        child_dropdown.style.display = 'none'
+    } else {
+        exibir_menu = true
+        child_dropdown.style.display = 'block'
+    }
+}
+var exibir_caminhao = false
+
+function mostrartrucks() {
+    if (exibir_caminhao == true) {
+        exibir_caminhao = false
+        caminhaoes.style.display = 'none'
+    } else {
+        exibir_caminhao = true
+        caminhaoes.style.display = 'block'
+    }
+}
