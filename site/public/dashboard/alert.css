@@ -831,12 +831,12 @@
   
   /* Alerta */
   #alerta {
-    position: absolute;
+    position: fixed;
     right: 0px;
     z-index: 9;
   }
   #alerta2 {
-    position: absolute;
+    position: fixed;
     right: 0px;
     z-index: 9;
     top:27%;
