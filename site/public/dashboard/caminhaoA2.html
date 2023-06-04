@@ -73,7 +73,7 @@
       <div class="separa">
         <div class="box_kpi ao_redor">
           <div class=" titulokpi">
-            Temperatura Geral
+            Temperatura Atual
           </div>
           <span class="kpi " id="card_temp" >
             - 5°C
@@ -81,7 +81,7 @@
         </div>
         <div class="box_kpi ao_redor">
           <div class=" titulokpi" >
-            Umidade Geral
+            Umidade Atual
           </div>
           <span class="kpi" id="card_umi">
             80%
@@ -103,7 +103,7 @@
         </div>
       </div>
       <div class="tituloB2 b3">
-        <h1><b>Anual Geral</b> </h1>
+        <h1><b>Anual</b> </h1>
       </div>
       <div class="grafico1">
 
@@ -117,10 +117,10 @@
       <div class="separa">
         <div class="box_kpi ao_redor">
           <div class=" titulokpi">
-            Quantidade de Caminhões
+            Caminhão No:
           </div>
           <span id="kpiQTD" class="kpi" style="color: black;">
-            0
+            A2
           </span>
         </div>
         <div class="box_kpi ao_redor">
@@ -139,8 +139,8 @@
 
   </div>
   <div class="tituloB2">
-    <h1><b>Gelo</b> </h1>
-    <h1><b>Nitrogênio</b> </h1>
+    <h1><b>Diário</b> </h1>
+    <h1><b>Mensal</b> </h1>
   </div>
 
   <div class="body2">
@@ -245,7 +245,7 @@
         label: ' Temperatura Média',
         borderColor: '#022841',
         backgroundColor: '#022841',
-        data: [-1, 0, -2, 5, -18, -15, -10],
+        data: [-1, -18, -8, -2, -9, -4, -3],
         borderWidth: 3,
 
       },
@@ -253,7 +253,7 @@
         label: 'Umidade Média',
         borderColor: '#0f65bb',
         backgroundColor: '#0f65bb',
-        data: [80, 82, 80, 85, 90, 91],
+        data: [70, 60, 79, 52, 90, 78],
         borderWidth: 3
       }]
     },
@@ -301,7 +301,7 @@
     const chart1 = new Chart('donuts-1', {
       type: 'doughnut', // Aqui muda o tipo do gráfico, os mais comuns são 'line', 'bar', 'pizza', 'radio', 'doughnut'
       data: {
-        labels: ['Caminhões com Gelo', 'Caminhões com Nitrogênio'], // Aqui serve para definir quais são os dados que você quer guardar
+        labels: ['Alerta', 'Normal'], // Aqui serve para definir quais são os dados que você quer guardar
         datasets: [{
           label: 'Alertas ',
           data: [gelo, nitro], // Dados das "labels", qualquer valor é "100%" você não precisa ter um somatório de 100 números para dar 100%, não é assim que porcentagem funciona, porcentagem é flexível e depende do seu valor final, se 50 for o total de coisas que você tem, logo ela é o seu 100%, metade disso (50%) seria 25 coisas
