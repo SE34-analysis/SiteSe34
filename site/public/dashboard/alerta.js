@@ -1,4 +1,5 @@
 token = sessionStorage.TOKEN_USUARIO;
+
 var alertas = [];
 
   
@@ -36,33 +37,44 @@ function alertar(resposta, token) {
     };
 
     var classe_temperatura = 'cor-alerta';
-
+    var kpi= document.getElementById('card_temp');
+    var kpi4= document.getElementById('sp_4');
     if (temp >= limites.muito_quente) {
         classe_temperatura = 'cor-alerta perigo-quente';
         grauDeAviso = 'perigo quente'
         grauDeAvisoCor = 'cor-alerta perigo-quente'
+        kpi.style.color = '#FF4929'
+        kpi4.style.color = '#FF4929'
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp < limites.muito_quente && temp >= limites.quente) {
         classe_temperatura = 'cor-alerta alerta-quente';
         grauDeAviso = 'alerta quente'
         grauDeAvisoCor = 'cor-alerta alerta-quente'
+        kpi.style.color = '#ffee58'
+        kpi4.style.color = '#ffee58'
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp < limites.quente && temp > limites.frio) {
         classe_temperatura = 'cor-alerta ideal';
+        kpi.style.color = '#83F46B'
+        kpi4.style.color = '#83F46B'
         removerAlerta(token);
     }
     else if (temp <= limites.frio && temp > limites.muito_frio) {
         classe_temperatura = 'cor-alerta alerta-frio';
         grauDeAviso = 'alerta frio'
         grauDeAvisoCor = 'cor-alerta alerta-frio'
+        kpi.style.color = '#f09e24'
+        kpi4.style.color = '#f09e24'
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp <= limites.muito_frio) {
-        classe_temperatura = 'cor-alerta perigo-frio';
+        classe_temperatura = 'cor-alerta perigo-frio'; 
         grauDeAviso = 'perigo frio'
         grauDeAvisoCor = 'cor-alerta perigo-frio'
+        kpi.style.color = '#d65230'
+        kpi4.style.color = '#d65230'
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
 
@@ -120,6 +132,9 @@ function exibirCards() {
 }
 
 function transformarEmDiv({ token, temp, grauDeAviso, grauDeAvisoCor }) {
+
+   
+
     return `<div class="mensagem-alarme">
     <div class="informacao">
     <div class="${grauDeAvisoCor}">&#12644;</div> 
@@ -127,7 +142,9 @@ function transformarEmDiv({ token, temp, grauDeAviso, grauDeAvisoCor }) {
     <small>Temperatura ${temp}.</small>   
     </div>
     <div class="alarme-sino"></div>
-    </div>`;
+    </div>`
+    ;
+   
 }
   
   function atualizacaoPeriodica() {
@@ -176,27 +193,32 @@ function alertar2(resposta, token) {
     };
 
     var classe_umidade = 'cor-alerta';
+    var kpi2= document.getElementById('card_umi');
 
     if (umi >= limites.muito_quente) {
         classe_umidade = 'cor-alerta perigo-umido';
         grauDeAviso = 'perigo-umido'
         grauDeAvisoCor = 'cor-alerta perigo-umido'
+         kpi2.style.color = '#002657af'
         exibirAlerta2(umi, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (umi < limites.muito_quente && umi >= limites.quente) {
         classe_umidade = 'cor-alerta alerta-umido';
         grauDeAviso = 'alerta-umido'
         grauDeAvisoCor = 'cor-alerta alerta-umido'
+         kpi2.style.color = '#4169E1'
         exibirAlerta2(umi, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (umi < limites.quente && umi > limites.frio) {
         classe_umidade = 'cor-alerta ideal2';
+         kpi2.style.color = '#83F46B'
         removerAlerta2(token);
     }
     else if (umi <= limites.frio && umi > limites.muito_frio) {
         classe_umidade = 'cor-alerta alerta-seco';
         grauDeAviso = 'alerta-seco'
         grauDeAvisoCor = 'cor-alerta alerta-seco'
+         kpi2.style.color = '#87c8e0'
         exibirAlerta2(umi, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (umi <= limites.muito_frio) {
@@ -204,6 +226,7 @@ function alertar2(resposta, token) {
         classe_umidade = 'cor-alerta perigo-seco';
         grauDeAviso = 'perigo-seco'
         grauDeAvisoCor = 'cor-alerta perigo-seco'
+         kpi2.style.color = '#789db8'
         exibirAlerta2(umi, token, grauDeAviso, grauDeAvisoCor)
     }
 

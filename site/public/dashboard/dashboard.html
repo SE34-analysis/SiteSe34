@@ -67,8 +67,10 @@
 
 
   <div class="body1">
+   
     <div id="alerta"></div>
     <div id="alerta2"></div>
+
     <div class="esquerda">
       <div class="separa">
         <div class="box_kpi ao_redor">
@@ -127,7 +129,7 @@
           <div class=" titulokpi">
             Situação Geral
           </div>
-          <span class="kpi2">
+          <span class="kpi2" id="sp_4">
             Na média
           </span>
         </div>
@@ -175,7 +177,7 @@
   // buscarStatSensor();
   // buscarTipoCaminhao();
 
-  window.onload = atualizacaoPeriodica();
+ 
 
   // const ctx = document.getElementById('myChart1');
 
@@ -785,7 +787,7 @@
   //   plotarPizza2()
   // }
   }
-
+  window.onload = atualizacaoPeriodica();
 
 
 </script>
