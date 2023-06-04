@@ -80,7 +80,7 @@ rt * {
 
 }
 .body1 {
-    height: 100vh;
+    height: 120vh;
     width: 100%;
     /* border: #000000 solid 2px; */
     display: flex;
@@ -104,10 +104,11 @@ rt * {
     justify-content: center;
     align-items: center;
     justify-content: space-around;
-    margin-top: 100px;
+    margin-top: 50px;
     font-size: 20px;
   
 }
+
 /* .b3{
     margin-top: 10px;
 } */
@@ -201,7 +202,7 @@ rt * {
 /* Gráfico do meio  */
 .aviso {
     width: 100%;
-    height: 50%;
+    height: 65%;
     border: #949494 solid 2px;
     background-color: white;
     text-align: center;
@@ -220,8 +221,10 @@ rt * {
     flex-direction: row;
     justify-content: center;
     align-items: center;  
-    margin-top: 25px;
+    top: 225px;
+    margin-bottom: 25px;
 }
+
 .grafico2{
     height: 400px;
     width: 600px;

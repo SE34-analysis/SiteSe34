@@ -1,5 +1,6 @@
 token = sessionStorage.TOKEN_USUARIO;
-
+idCaminhao= 50;
+idCaminhao2=  51;
 var alertas = [];
 
   
@@ -39,6 +40,10 @@ function alertar(resposta, token) {
     var classe_temperatura = 'cor-alerta';
     var kpi= document.getElementById('card_temp');
     var kpi4= document.getElementById('sp_4');
+     var alertC1 = document.getElementById('C1');
+     var alertC2 = document.getElementById('C2');
+var painel_geral = document.getElementById('painel_geral');
+
 
 
     if (temp >= limites.muito_quente) {
@@ -47,7 +52,13 @@ function alertar(resposta, token) {
         grauDeAvisoCor = 'cor-alerta perigo-quente'
         kpi.style.color = '#FF4929'
         kpi4.style.color = '#FF4929'
+        alertC1.style.color = '#FF4929'
+        alertC2.style.color = '#FF4929'
         kpi4.innerHTML ='Crítico'
+        painel_geral.innerHTML = `<p> <b> Crítico!</b><br> O caminhão <b>A2</b> está precisando de Supervisão, pois o estado está crítico, fazer
+        algo para diminuir a temperatura urgente.</p>`;
+
+
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp < limites.muito_quente && temp >= limites.quente) {
@@ -56,7 +67,11 @@ function alertar(resposta, token) {
         grauDeAvisoCor = 'cor-alerta alerta-quente'
         kpi.style.color = '#ffee58'
         kpi4.style.color = '#ffee58'
+        alertC1.style.color = '#ffee58'
+        alertC2.style.color = '#ffee58'
         kpi4.innerHTML ='Alerta'
+        painel_geral.innerHTML = `<p> <b> Atenção!</b><br> O caminhão <b>A2</b> está precisando de Supervisão,
+         pois o estado está em Alerta, ficar de olho para a temperatura não aumentar demais.</p>`;
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp < limites.quente && temp > limites.frio) {
@@ -64,6 +79,9 @@ function alertar(resposta, token) {
         kpi.style.color = '#83F46B'
         kpi4.style.color = '#83F46B'
         kpi4.innerHTML ='Ideal'
+        alertC1.style.color ='#83F46B'
+        alertC2.style.color ='#83F46B'
+        painel_geral.innerHTML = `<p><b>Tudo Normal</b><br>Os caminhãoes estão com as tempraturas ideias</p>`;
         removerAlerta(token);
     }
     else if (temp <= limites.frio && temp > limites.muito_frio) {
@@ -73,6 +91,10 @@ function alertar(resposta, token) {
         kpi.style.color = '#f09e24'
         kpi4.style.color = '#f09e24'
         kpi4.innerHTML ='Alerta'
+        alertC1.style.color ='#f09e24'
+        alertC2.style.color ='#f09e24'
+        painel_geral.innerHTML = `<p><b>Atenção!</b><br> O caminhão <b>A2</b> está precisando de Supervisão,
+        pois o estado está em Alerta, ficar de olho para a temperatura não diminuir demais.</p>`;
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp <= limites.muito_frio) {
@@ -81,8 +103,16 @@ function alertar(resposta, token) {
         grauDeAvisoCor = 'cor-alerta perigo-frio'
         kpi.style.color = '#d65230'
         kpi4.style.color = '#d65230'
+        alertC1.style.color ='#d65230'
+        alertC2.style.color ='#d65230'
         kpi4.innerHTML ='Crítico'
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
+
+        painel_geral.innerHTML = `<p> <b> Crítico!</b><br> O caminhão <b>A2</b> está precisando de Supervisão,
+         pois o estado está crítico, fazer
+        algo para aumentar a temperatura urgente.</p>`;
+
+        
     }
 
     // var card;
@@ -207,6 +237,10 @@ function alertar2(resposta, token) {
         grauDeAviso = 'perigo-umido'
         grauDeAvisoCor = 'cor-alerta perigo-umido'
          kpi2.style.color = '#002657af'
+         painel_geral.innerHTML += `<p> <b> Crítico!</b><br> O caminhão <b>A2</b> está precisando de Supervisão,
+         pois o estado está crítico, fazer
+        algo  urgente para diminuir a umidade, por conta de estar umido demias.</p>`;
+
         exibirAlerta2(umi, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (umi < limites.muito_quente && umi >= limites.quente) {
@@ -214,11 +248,14 @@ function alertar2(resposta, token) {
         grauDeAviso = 'alerta-umido'
         grauDeAvisoCor = 'cor-alerta alerta-umido'
          kpi2.style.color = '#4169E1'
+         painel_geral.innerHTML += `<p><b>Atenção!</b><br> O caminhão <b>A2</b> está precisando de Supervisão,
+        pois o estado está em Alerta, ficar de olho para a umidade não ficar muito umido demais.</p>`;
         exibirAlerta2(umi, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (umi < limites.quente && umi > limites.frio) {
         classe_umidade = 'cor-alerta ideal2';
          kpi2.style.color = '#83F46B'
+         painel_geral.innerHTML += `<p><b>Tudo Normal</b><br>Os caminhãoes estão com as umidades ideias</p>`;
         removerAlerta2(token);
     }
     else if (umi <= limites.frio && umi > limites.muito_frio) {
@@ -226,6 +263,8 @@ function alertar2(resposta, token) {
         grauDeAviso = 'alerta-seco'
         grauDeAvisoCor = 'cor-alerta alerta-seco'
          kpi2.style.color = '#87c8e0'
+         painel_geral.innerHTML +=`<p><b>Atenção!</b><br> O caminhão <b>A2</b> está precisando de Supervisão,
+        pois o estado está em Alerta, ficar de olho para a umidade não ficar seca demais.</p>`;
         exibirAlerta2(umi, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (umi <= limites.muito_frio) {
@@ -234,6 +273,9 @@ function alertar2(resposta, token) {
         grauDeAviso = 'perigo-seco'
         grauDeAvisoCor = 'cor-alerta perigo-seco'
          kpi2.style.color = '#789db8'
+         painel_geral.innerHTML += `<p> <b> Crítico!</b><br> O caminhão <b>A2</b> está precisando de Supervisão,
+         pois o estado está crítico, fazer
+        algo urgente para o caminhão ficar mais umidado.</p>`;
         exibirAlerta2(umi, token, grauDeAviso, grauDeAvisoCor)
     }
 

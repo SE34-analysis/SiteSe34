@@ -48,10 +48,9 @@
           <button class="dropbtn" onclick="mostrartrucks()"><img
             src='../assets/img/free-truck-icon-1058-thumb.png' height="45px" width="45px" /></button>
             <div class="dropdown-content" id="caminhaoes">
-              <a href="caminhao.html" style="color: red;"> Caminhão A1</a>
-              <a href="caminhaoA2.html" style="color: #ff7b00;">Caminhão A2</a>
-              <a href="caminhaoA3.html" style="color: green;">Caminhão A3</a>
-              <a href="caminhaoA4.html" style="color: green;">Caminhão A4</a>
+              <a href="caminhao.html"    id="C1"> Caminhão A1</a>
+              <a href="caminhaoA2.html"   id="C2">Caminhão A2</a>
+             
             </div>
         </div>
 
@@ -97,7 +96,7 @@
     <div class="meio">
       <div class="painel">
         <h2><b>Painel Geral</b> </h2>
-        <div class="aviso ao_redor">
+        <div class="aviso ao_redor" id="painel_geral">
           <p> <b> Atenção!</b><br> O caminhão <b>A2</b> está precisando de atenção e o <b>A1</b> está crítico, fazer
             algo para reverter urgente.</p>
         </div>
@@ -163,8 +162,14 @@
 
 </html>
  <script>
+
+
+
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
   token = sessionStorage.TOKEN_USUARIO;
+
+  idCaminhao = 51;
+  sessionStorage.IDCAMINHAO2 = idCaminhao;
 
   Chart.defaults.font.weight = 'bold';
   Chart.defaults.color = '#000';
@@ -358,7 +363,7 @@
     obterDadosGrafico(2000)
     obterDadosGrafico(2001)
     buscarQtdCaminhao();
-  buscarStatSensor();
+  buscarStatSensorCam();
   buscarTipoCaminhao();
     // obterDadosGrafico(3)
     // obterDadosGrafico(4)
@@ -709,10 +714,11 @@
 
     return false;
   }
-  function buscarStatSensor() {
+  // 
+  function buscarStatSensorCam() {
     // aguardar();
 
-    fetch(`/medidas/tempo-real-2/${token}`
+    fetch(`/medidas/tempo/${token}/${idCaminhao}`
     ).then(function (resposta) {
 
       if (resposta.ok) {
@@ -781,7 +787,7 @@
   }
 
   function plotar() {
-    kpiQTD.innerHTML = sessionStorage.QTDCAMINHAO
+    // kpiQTD.innerHTML = sessionStorage.QTDCAMINHAO
 
     plotarPizza1()
 
