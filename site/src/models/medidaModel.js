@@ -17,6 +17,23 @@ function buscarUltimasMedidas(token, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
+function buscarUltimasMedidas(token, limite_linhas) {
+
+    instrucaoSql = ''
+        instrucaoSql = `select 
+        umi as umidade,
+        temp as temperatura, 
+                    dtHora,
+                        DATE_FORMAT(dtHora,'%H:%i:%s') as momento_grafico
+                    from leitura 
+						join sensor on idSensor = fkSensor
+                    where fkempresa = ${token}
+                    order by idTempUmi desc limit ${limite_linhas};`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarMedidasEmTempoReal(token) {
 
     instrucaoSql = ''

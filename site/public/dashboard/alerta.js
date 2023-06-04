@@ -145,7 +145,7 @@ function transformarEmDiv({ token, temp, grauDeAviso, grauDeAvisoCor }) {
     return `<div class="mensagem-alarme">
     <div class="informacao">
     <div class="${grauDeAvisoCor}">&#12644;</div> 
-     <h3>Caminhão ${token} está em estado de ${grauDeAviso}!</h3>
+     <h3>Caminhão 1 está em estado de ${grauDeAviso}!</h3>
     <small>Temperatura ${temp}.</small>   
     </div>
     <div class="alarme-sino"></div>
@@ -293,7 +293,7 @@ function transformarEmDiv2({ token, umi, grauDeAviso, grauDeAvisoCor }) {
     return `<div class="mensagem-alarme">
     <div class="informacao">
     <div class="${grauDeAvisoCor}">&#12644;</div> 
-     <h3>Caminhão ${token} está em estado de ${grauDeAviso}!</h3>
+     <h3>Caminhão 2 está em estado de ${grauDeAviso}!</h3>
     <small>Umidade ${umi}.</small>   
     </div>
     <div class="alarme-sino"></div>
