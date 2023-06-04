@@ -65,9 +65,9 @@
 
 
   <div class="body1">
-<!--    
+   
     <div id="alerta"></div>
-    <div id="alerta2"></div> -->
+    <div id="alerta2"></div>
 
     <div class="esquerda">
       <div class="separa">
@@ -120,7 +120,7 @@
             Caminhão No:
           </div>
           <span id="kpiQTD" class="kpi" style="color: black;">
-            A1
+            A4
           </span>
         </div>
         <div class="box_kpi ao_redor">
@@ -245,7 +245,7 @@
         label: ' Temperatura Média',
         borderColor: '#022841',
         backgroundColor: '#022841',
-        data: [-14, -1, -18, 5, -1, -13, -9],
+        data: [-3, -12, -8, -3, -5, -7, -4],
         borderWidth: 3,
 
       },
@@ -253,7 +253,7 @@
         label: 'Umidade Média',
         borderColor: '#0f65bb',
         backgroundColor: '#0f65bb',
-        data: [50, 62, 89, 72, 80, 90],
+        data: [90, 86, 69, 89, 90, 70],
         borderWidth: 3
       }]
     },
@@ -358,7 +358,7 @@
     obterDadosGrafico(2000)
     obterDadosGrafico(2001)
     buscarQtdCaminhao();
-  buscarStatSensorCam();
+  buscarStatSensor();
   buscarTipoCaminhao();
     // obterDadosGrafico(3)
     // obterDadosGrafico(4)
@@ -709,40 +709,40 @@
 
     return false;
   }
-  // function buscarStatSensor() {
-  //   // aguardar();
+  function buscarStatSensor() {
+    // aguardar();
 
-  //   fetch(`/medidas/tempo-real-2/${token}`
-  //   ).then(function (resposta) {
+    fetch(`/medidas/tempo-real-2/${token}`
+    ).then(function (resposta) {
 
-  //     if (resposta.ok) {
-  //       console.log(resposta);
+      if (resposta.ok) {
+        console.log(resposta);
 
-  //       resposta.json().then(json => {
-  //         console.log(json);
-  //         console.log(JSON.stringify(json));
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
 
-  //         sessionStorage.STATSENSORATIVO = json[0].tipoSensor;
-  //         sessionStorage.STATSENSORINATIVO = json[1].tipoSensor;
-  //         sessionStorage.STATSENSORMANUTENCAO = json[2].tipoSensor;
-  //       });
+          sessionStorage.STATSENSORATIVO = json[0].tipoSensor;
+          sessionStorage.STATSENSORINATIVO = json[1].tipoSensor;
+          sessionStorage.STATSENSORMANUTENCAO = json[2].tipoSensor;
+        });
 
-  //     } else {
+      } else {
 
-  //       console.log("Houve um erro ao tentar realizar o login!");
+        console.log("Houve um erro ao tentar realizar o login!");
 
-  //       resposta.text().then(texto => {
-  //         console.error(texto);
-  //         // finalizarAguardar(texto);
-  //       });
-  //     }
+        resposta.text().then(texto => {
+          console.error(texto);
+          // finalizarAguardar(texto);
+        });
+      }
 
-  //   }).catch(function (erro) {
-  //     console.log(erro);
-  //   })
+    }).catch(function (erro) {
+      console.log(erro);
+    })
 
-  //   return false;
-  // }
+    return false;
+  }
   function buscarTipoCaminhao() {
     // aguardar();
 
@@ -781,7 +781,7 @@
   }
 
   function plotar() {
-    // kpiQTD.innerHTML = sessionStorage.QTDCAMINHAO
+    kpiQTD.innerHTML = sessionStorage.QTDCAMINHAO
 
     plotarPizza1()
 
@@ -789,41 +789,5 @@
   }
   window.onload = atualizacaoPeriodica();
 
-
-
-  function buscarStatSensorCam() {
-    // aguardar();
-    idCaminhao = 50;
-    fetch(`/medidas/tempo/${token}/${idCaminhao}`
-    ).then(function (resposta) {
-
-      if (resposta.ok) {
-        console.log(resposta);
-
-        resposta.json().then(json => {
-          console.log(json);
-          console.log(JSON.stringify(json));
-
-          sessionStorage.STATSENSORATIVO = json[0].tipoSensor;
-          sessionStorage.STATSENSORINATIVO = json[1].tipoSensor;
-          sessionStorage.STATSENSORMANUTENCAO = json[2].tipoSensor;
-        });
-
-      } else {
-
-        console.log("Houve um erro ao tentar realizar o login!");
-
-        resposta.text().then(texto => {
-          console.error(texto);
-          // finalizarAguardar(texto);
-        });
-      }
-
-    }).catch(function (erro) {
-      console.log(erro);
-    })
-
-    return false;
-  }
 
 </script>
