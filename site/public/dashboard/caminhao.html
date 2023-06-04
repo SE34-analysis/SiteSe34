@@ -65,9 +65,9 @@
 
 
   <div class="body1">
-   
+<!--    
     <div id="alerta"></div>
-    <div id="alerta2"></div>
+    <div id="alerta2"></div> -->
 
     <div class="esquerda">
       <div class="separa">
@@ -358,7 +358,7 @@
     obterDadosGrafico(2000)
     obterDadosGrafico(2001)
     buscarQtdCaminhao();
-  buscarStatSensor();
+  buscarStatSensorCam();
   buscarTipoCaminhao();
     // obterDadosGrafico(3)
     // obterDadosGrafico(4)
@@ -709,40 +709,40 @@
 
     return false;
   }
-  function buscarStatSensor() {
-    // aguardar();
+  // function buscarStatSensor() {
+  //   // aguardar();
 
-    fetch(`/medidas/tempo-real-2/${token}`
-    ).then(function (resposta) {
+  //   fetch(`/medidas/tempo-real-2/${token}`
+  //   ).then(function (resposta) {
 
-      if (resposta.ok) {
-        console.log(resposta);
+  //     if (resposta.ok) {
+  //       console.log(resposta);
 
-        resposta.json().then(json => {
-          console.log(json);
-          console.log(JSON.stringify(json));
+  //       resposta.json().then(json => {
+  //         console.log(json);
+  //         console.log(JSON.stringify(json));
 
-          sessionStorage.STATSENSORATIVO = json[0].tipoSensor;
-          sessionStorage.STATSENSORINATIVO = json[1].tipoSensor;
-          sessionStorage.STATSENSORMANUTENCAO = json[2].tipoSensor;
-        });
+  //         sessionStorage.STATSENSORATIVO = json[0].tipoSensor;
+  //         sessionStorage.STATSENSORINATIVO = json[1].tipoSensor;
+  //         sessionStorage.STATSENSORMANUTENCAO = json[2].tipoSensor;
+  //       });
 
-      } else {
+  //     } else {
 
-        console.log("Houve um erro ao tentar realizar o login!");
+  //       console.log("Houve um erro ao tentar realizar o login!");
 
-        resposta.text().then(texto => {
-          console.error(texto);
-          // finalizarAguardar(texto);
-        });
-      }
+  //       resposta.text().then(texto => {
+  //         console.error(texto);
+  //         // finalizarAguardar(texto);
+  //       });
+  //     }
 
-    }).catch(function (erro) {
-      console.log(erro);
-    })
+  //   }).catch(function (erro) {
+  //     console.log(erro);
+  //   })
 
-    return false;
-  }
+  //   return false;
+  // }
   function buscarTipoCaminhao() {
     // aguardar();
 
@@ -781,7 +781,7 @@
   }
 
   function plotar() {
-    kpiQTD.innerHTML = sessionStorage.QTDCAMINHAO
+    // kpiQTD.innerHTML = sessionStorage.QTDCAMINHAO
 
     plotarPizza1()
 
@@ -789,5 +789,41 @@
   }
   window.onload = atualizacaoPeriodica();
 
+
+
+  function buscarStatSensorCam() {
+    // aguardar();
+    idCaminhao = 50;
+    fetch(`/medidas/tempo/${token}/${idCaminhao}`
+    ).then(function (resposta) {
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+
+          sessionStorage.STATSENSORATIVO = json[0].tipoSensor;
+          sessionStorage.STATSENSORINATIVO = json[1].tipoSensor;
+          sessionStorage.STATSENSORMANUTENCAO = json[2].tipoSensor;
+        });
+
+      } else {
+
+        console.log("Houve um erro ao tentar realizar o login!");
+
+        resposta.text().then(texto => {
+          console.error(texto);
+          // finalizarAguardar(texto);
+        });
+      }
+
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+
+    return false;
+  }
 
 </script>
