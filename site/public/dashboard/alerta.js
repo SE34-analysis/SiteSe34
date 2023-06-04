@@ -39,12 +39,15 @@ function alertar(resposta, token) {
     var classe_temperatura = 'cor-alerta';
     var kpi= document.getElementById('card_temp');
     var kpi4= document.getElementById('sp_4');
+
+
     if (temp >= limites.muito_quente) {
         classe_temperatura = 'cor-alerta perigo-quente';
         grauDeAviso = 'perigo quente'
         grauDeAvisoCor = 'cor-alerta perigo-quente'
         kpi.style.color = '#FF4929'
         kpi4.style.color = '#FF4929'
+        kpi4.innerHTML ='Crítico'
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp < limites.muito_quente && temp >= limites.quente) {
@@ -53,12 +56,14 @@ function alertar(resposta, token) {
         grauDeAvisoCor = 'cor-alerta alerta-quente'
         kpi.style.color = '#ffee58'
         kpi4.style.color = '#ffee58'
+        kpi4.innerHTML ='Alerta'
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp < limites.quente && temp > limites.frio) {
         classe_temperatura = 'cor-alerta ideal';
         kpi.style.color = '#83F46B'
         kpi4.style.color = '#83F46B'
+        kpi4.innerHTML ='Ideal'
         removerAlerta(token);
     }
     else if (temp <= limites.frio && temp > limites.muito_frio) {
@@ -67,6 +72,7 @@ function alertar(resposta, token) {
         grauDeAvisoCor = 'cor-alerta alerta-frio'
         kpi.style.color = '#f09e24'
         kpi4.style.color = '#f09e24'
+        kpi4.innerHTML ='Alerta'
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp <= limites.muito_frio) {
@@ -75,6 +81,7 @@ function alertar(resposta, token) {
         grauDeAvisoCor = 'cor-alerta perigo-frio'
         kpi.style.color = '#d65230'
         kpi4.style.color = '#d65230'
+        kpi4.innerHTML ='Crítico'
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
     }
 

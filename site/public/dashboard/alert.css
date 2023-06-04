@@ -835,6 +835,12 @@
     right: 0px;
     z-index: 9;
   }
+  #alerta2 {
+    position: absolute;
+    right: 0px;
+    z-index: 9;
+    top:27%;
+  }
   
   .alertaCor{
     width: 100%;
@@ -851,7 +857,7 @@
   }
   
   .mensagem-alarme {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.842);
     border-radius: 5px;
     width: 300px;
     height:fit-content; /*80px */

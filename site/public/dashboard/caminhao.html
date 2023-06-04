@@ -5,13 +5,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Caminhão A1</title>
+  <title>Dashboard</title>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
   <link rel="stylesheet" href="style.css">
+  <script src="alerta.js"></script>
+  <link rel="stylesheet" href="alert.css">
+  <link rel="stylesheet" href="dashboards.css">
+
   <script src="../js/funcoes.js"></script>
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -23,14 +27,14 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!--FONT AWESOME-->
   <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="dashboards.css">
 </head>
 
-<body onload="buscarStatSensorCam();">
+<body onload="validarSessao()">
+  <!-- ; validarSessao() -->
   <div class="header">
     <div class="container">
       <h1 class="icon1">
-        <a href="dashboard.html"> <img class="img1" src="../assets/img/SE34-2.png"></a>
+        <a href="../index.html"> <img class="img1" src="../assets/img/SE34-2.png"></a>
       </h1>
       <div class="navbar">
         <div class="hello">
@@ -54,14 +58,16 @@
          <a onclick="limparSessao()"><img src="https://cdn-icons-png.flaticon.com/512/126/126467.png" alt="" height="31px"></a>
        </div>
       </div>
-    </div>
+      
   </div>
   </div>
   </div>
-
 
 
   <div class="body1">
+   
+    <div id="alerta"></div>
+    <div id="alerta2"></div>
 
     <div class="esquerda">
       <div class="separa">
@@ -69,16 +75,16 @@
           <div class=" titulokpi">
             Temperatura Atual
           </div>
-          <span id="kpiTemperaturaBase" class="kpi" style="color: #ff7b00;">
-            0°C
+          <span class="kpi " id="card_temp" >
+            - 5°C
           </span>
         </div>
         <div class="box_kpi ao_redor">
-          <div class=" titulokpi">
+          <div class=" titulokpi" >
             Umidade Atual
           </div>
-          <span id="kpiUmidadeBase" class="kpi" style="color: #ff7b00;">
-            0%
+          <span class="kpi" id="card_umi">
+            80%
           </span>
         </div>
 
@@ -92,14 +98,15 @@
       <div class="painel">
         <h2><b>Painel Geral</b> </h2>
         <div class="aviso ao_redor">
-          <p> <b>Atenção!</b> <br>O sensor do caminhão A2 está capitando um temperatura acima de 0ºC,<br>
-            ficar atento pois quando chegar em 1.5°C o gelo pode descongelar. Tomar atitude antes que fique pior</p>
-        </div>
-        <div class="tituloB2 b3">
-          <h1><b>Anual</b> </h1>
+          <p> <b> Atenção!</b><br> O caminhão <b>A2</b> está precisando de atenção e o <b>A1</b> está crítico, fazer
+            algo para reverter urgente.</p>
         </div>
       </div>
+      <div class="tituloB2 b3">
+        <h1><b>Anual</b> </h1>
+      </div>
       <div class="grafico1">
+
         <div>
           <canvas id="myChart3"></canvas>
         </div>
@@ -110,9 +117,9 @@
       <div class="separa">
         <div class="box_kpi ao_redor">
           <div class=" titulokpi">
-            Identificação do Caminhão
+            Quantidade de Caminhões
           </div>
-          <span id="kpiQTD" class="kpi" style="color: #110f08;">
+          <span id="kpiQTD" class="kpi" style="color: black;">
             0
           </span>
         </div>
@@ -120,8 +127,8 @@
           <div class=" titulokpi">
             Situação Geral
           </div>
-          <span class="kpi2 " style="color: #ffc400;">
-            Atenção
+          <span class="kpi2" id="sp_4">
+            Na média
           </span>
         </div>
       </div>
@@ -132,18 +139,18 @@
 
   </div>
   <div class="tituloB2">
-    <h1><b>Mensal</b> </h1>
     <h1><b>Diário</b> </h1>
+    <h1><b>Mensal</b> </h1>
   </div>
 
   <div class="body2">
 
     <div class="grafico2">
-      <canvas id="myChart1"></canvas>
+      <canvas id="myChart2000"></canvas>
     </div>
 
     <div class="grafico2">
-      <canvas id="myChart2"></canvas>
+      <canvas id="myChart2001"></canvas>
     </div>
   </div>
 
@@ -155,8 +162,8 @@
 </body>
 
 </html>
-<script>
-b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+ <script>
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
   token = sessionStorage.TOKEN_USUARIO;
 
   Chart.defaults.font.weight = 'bold';
@@ -164,10 +171,7 @@ b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
   Chart.defaults.font.family = 'Times New Roman';
   Chart.defaults.font.size = 16;
 
-    plotar()
-  // buscarQtdCaminhao();
-  // buscarStatSensor();
-  // buscarTipoCaminhao();
+ 
 
   // const ctx = document.getElementById('myChart1');
 
@@ -262,12 +266,86 @@ b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     }
   });
 
+
+  function plotarPizza2() {
+
+    ativo = sessionStorage.STATSENSORATIVO
+    inativo = sessionStorage.STATSENSORINATIVO
+    manutencao = sessionStorage.STATSENSORMANUTENCAO
+
+    /* -- Gráfico de Rosca -- */
+    const chart = new Chart('donuts-2', {
+      type: 'doughnut', // Aqui muda o tipo do gráfico, os mais comuns são 'line', 'bar', 'pizza', 'radio', 'doughnut'
+      data: {
+        labels: ['Ativo', 'Inativo', 'Manutenção'], // Aqui serve para definir quais são os dados que você quer guardar
+        datasets: [{
+          label: 'Sensores', // Aqui é mais para um nome geral
+          data: [ativo, inativo, manutencao], // Dados das "labels", qualquer valor é "100%" você não precisa ter um somatório de 100 números para dar 100%, não é assim que porcentagem funciona, porcentagem é flexível e depende do seu valor final, se 50 for o total de coisas que você tem, logo ela é o seu 100%, metade disso (50%) seria 25 coisas
+          backgroundColor: ['#008000', '#A9A9A9', '#FFD700'], // Cor  do fundo
+          borderColor: ['#008000', '#A9A9A9', '#FFD700'], // Cor da borda
+        }
+        ]
+      },
+      options: {
+        maintainAspectRatio: false,
+      }
+    });
+  }
+
+  function plotarPizza1() {
+
+    var gelo = sessionStorage.TIPOCAMINHAOGELO
+    var nitro = sessionStorage.TIPOCAMINHAONITRO
+
+
+    const chart1 = new Chart('donuts-1', {
+      type: 'doughnut', // Aqui muda o tipo do gráfico, os mais comuns são 'line', 'bar', 'pizza', 'radio', 'doughnut'
+      data: {
+        labels: ['Alerta', 'Normal'], // Aqui serve para definir quais são os dados que você quer guardar
+        datasets: [{
+          label: 'Alertas ',
+          data: [gelo, nitro], // Dados das "labels", qualquer valor é "100%" você não precisa ter um somatório de 100 números para dar 100%, não é assim que porcentagem funciona, porcentagem é flexível e depende do seu valor final, se 50 for o total de coisas que você tem, logo ela é o seu 100%, metade disso (50%) seria 25 coisas
+          backgroundColor: ['#022841', '#0f65bb'], // Cor  do fundo
+          borderColor: ['#022841', '#0f65bb'], // Cor da borda
+        }
+        ]
+      },
+      options: {
+        maintainAspectRatio: false,
+      }
+    });
+  }
+
   function AtualizarKPI(umidade, temperatura) {
+    var ArrayUmidade = [];
+    var ArreyTemperatura = [];
+    var umidadeMedia = 0;
+    var temperaturaMedia = 0;
+    
+    ArrayUmidade.push(umidade);
+    ArreyTemperatura.push(temperatura);
+    
+    var tamanho =  ArreyUmidade.length
+    if(tamanho > 7) {
+      ArrayUmidade.splice(tamanho-1, 1)
+      ArrayTemperatura.splice(tamanho-1, 1)
 
-kpiUmidadeBase.innerHTML = `${umidade}%`;
+      tamanho =  ArreyUmidade.length
+      console.log(ArrayUmidade)
+    }
+ 
+    for(cont = 0; cont < tamanho; cont++){
+      umidadeMedia += ArreyUmidade[cont]
+      TemperaturaMedia += ArreyTemperatura[cont]
+    }
 
-kpiTemperaturaBase.innerHTML = `${temperatura}°C`;
-}
+    umidadeMedia = umidadeMedia / tamanho
+    temperaturaMedia = temperaturaMedia / tamanho
+
+    kpiUmidadeBase.innerHTML = `${umidadeMedia}%`;
+
+    kpiTemperaturaBase.innerHTML = `${temperaturaMedia}°C`;
+  }
 
 
   // PARA CAPTURAR OS DADOS DO BANCO COMEÇA AQUI
@@ -279,6 +357,9 @@ kpiTemperaturaBase.innerHTML = `${temperatura}°C`;
   function obterDadosGraficos() {
     obterDadosGrafico(2000)
     obterDadosGrafico(2001)
+    buscarQtdCaminhao();
+  buscarStatSensor();
+  buscarTipoCaminhao();
     // obterDadosGrafico(3)
     // obterDadosGrafico(4)
   }
@@ -411,9 +492,18 @@ kpiTemperaturaBase.innerHTML = `${temperatura}°C`;
 
     // Adicionando gráfico criado em div na tela
     let myChart = new Chart(
-      document.getElementById(`myChart1`),
+      document.getElementById(`myChart${token}`),
       config
     );
+
+   
+
+
+
+
+
+
+
 
     // Criando estrutura para plotar gráfico - labels
     let labels2 = [];
@@ -465,11 +555,11 @@ kpiTemperaturaBase.innerHTML = `${temperatura}°C`;
 
     // Adicionando gráfico criado em div na tela
     let myChart2 = new Chart(
-      document.getElementById(`myChart2`),
+      document.getElementById(`myChart2001`),
       config
     );
 
-    setTimeout(() => atualizarGrafico(token, dados, dados2, myChart, myChart2), 2000);
+    setTimeout(() => atualizarGrafico(token, dados, dados2, myChart, myChart2), 1000);
   }
 
 
@@ -513,6 +603,7 @@ kpiTemperaturaBase.innerHTML = `${temperatura}°C`;
 
             dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
             dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
             AtualizarKPI(novoRegistro[0].umidade, novoRegistro[0].temperatura)
             myChart.update();
           }
@@ -568,12 +659,12 @@ kpiTemperaturaBase.innerHTML = `${temperatura}°C`;
           }
 
           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados2, myChart2), 2001);
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados2, myChart2), 10001);
         });
       } else {
         console.error('Nenhum dado encontrado ou erro na API');
         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados2, myChart2), 2001);
+        proximaAtualizacao = setTimeout(() => atualizarGrafico(token, dados2, myChart2), 10001);
       }
     })
       .catch(function (error) {
@@ -596,6 +687,40 @@ kpiTemperaturaBase.innerHTML = `${temperatura}°C`;
           console.log(JSON.stringify(json));
 
           sessionStorage.QTDCAMINHAO = json[0].qtdCaminhao;
+        });
+
+      } else {
+
+        console.log("Houve um erro ao tentar realizar o login!");
+
+        resposta.text().then(texto => {
+          console.error(texto);
+          // finalizarAguardar(texto);
+        });
+      }
+
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+
+    return false;
+  }
+  function buscarStatSensor() {
+    // aguardar();
+
+    fetch(`/medidas/tempo-real-2/${token}`
+    ).then(function (resposta) {
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+
+          sessionStorage.STATSENSORATIVO = json[0].tipoSensor;
+          sessionStorage.STATSENSORINATIVO = json[1].tipoSensor;
+          sessionStorage.STATSENSORMANUTENCAO = json[2].tipoSensor;
         });
 
       } else {
@@ -651,102 +776,14 @@ kpiTemperaturaBase.innerHTML = `${temperatura}°C`;
     return false;
   }
 
-  
-  function plotar(){
-    kpiQTD.innerHTML = sessionStorage.IDCAMINHAO  - 49
+  function plotar() {
+    kpiQTD.innerHTML = sessionStorage.QTDCAMINHAO
+
     plotarPizza1()
 
     plotarPizza2()
   }
-
-  var token = sessionStorage.TOKEN_USUARIO;
-  var idCaminhao = sessionStorage.IDCAMINHAO;
-  function buscarStatSensorCam() {
-    // aguardar();
-
-    fetch(`/medidas/tempo/${token}/${idCaminhao}`
-    ).then(function (resposta) {
-
-      if (resposta.ok) {
-        console.log(resposta);
-
-        resposta.json().then(json => {
-          console.log(json);
-          console.log(JSON.stringify(json));
-
-          sessionStorage.STATSENSORATIVO = json[0].tipoSensor;
-          sessionStorage.STATSENSORINATIVO = json[1].tipoSensor;
-          sessionStorage.STATSENSORMANUTENCAO = json[2].tipoSensor;
-
-          plotar()
-        });
-
-      } else {
-
-        console.log("Houve um erro ao tentar realizar o login!");
-
-        resposta.text().then(texto => {
-          console.error(texto);
-          // finalizarAguardar(texto);
-        });
-      }
-
-    }).catch(function (erro) {
-      console.log(erro);
-    })
-
-    return false;
-  }
-
-  function plotarPizza2() {
-
-ativo = sessionStorage.STATSENSORATIVO
-inativo = sessionStorage.STATSENSORINATIVO
-manutencao = sessionStorage.STATSENSORMANUTENCAO
-
-/* -- Gráfico de Rosca -- */
-const chart = new Chart('donuts-2', {
-  type: 'doughnut', // Aqui muda o tipo do gráfico, os mais comuns são 'line', 'bar', 'pizza', 'radio', 'doughnut'
-  data: {
-    labels: ['Ativo', 'Inativo', 'Manutenção'], // Aqui serve para definir quais são os dados que você quer guardar
-    datasets: [{
-      label: 'Sensores', // Aqui é mais para um nome geral
-      data: [ativo, inativo, manutencao], // Dados das "labels", qualquer valor é "100%" você não precisa ter um somatório de 100 números para dar 100%, não é assim que porcentagem funciona, porcentagem é flexível e depende do seu valor final, se 50 for o total de coisas que você tem, logo ela é o seu 100%, metade disso (50%) seria 25 coisas
-      backgroundColor: ['#008000', '#A9A9A9', '#FFD700'], // Cor  do fundo
-      borderColor: ['#008000', '#A9A9A9', '#FFD700'], // Cor da borda
-    }
-    ]
-  },
-  options: {
-    maintainAspectRatio: false,
-  }
-});
-}
-
-function plotarPizza1() {
-
-var gelo = sessionStorage.TIPOCAMINHAOGELO
-var nitro = sessionStorage.TIPOCAMINHAONITRO
-
-
-const chart1 = new Chart('donuts-1', {
-  type: 'doughnut', // Aqui muda o tipo do gráfico, os mais comuns são 'line', 'bar', 'pizza', 'radio', 'doughnut'
-  data: {
-    labels: ['Caminhões com Gelo', 'Caminhões com Nitrogênio'], // Aqui serve para definir quais são os dados que você quer guardar
-    datasets: [{
-      label: 'Alertas ',
-      data: [gelo, nitro], // Dados das "labels", qualquer valor é "100%" você não precisa ter um somatório de 100 números para dar 100%, não é assim que porcentagem funciona, porcentagem é flexível e depende do seu valor final, se 50 for o total de coisas que você tem, logo ela é o seu 100%, metade disso (50%) seria 25 coisas
-      backgroundColor: ['#022841', '#0f65bb'], // Cor  do fundo
-      borderColor: ['#022841', '#0f65bb'], // Cor da borda
-    }
-    ]
-  },
-  options: {
-    maintainAspectRatio: false,
-  }
-});
-}
-
+  window.onload = atualizacaoPeriodica();
 
 
 </script>
