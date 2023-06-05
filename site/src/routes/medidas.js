@@ -7,6 +7,10 @@ router.get("/ultimas/:token", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
 });
 
+router.get("/ultimas2/:token", function (req, res) {
+    medidaController.buscarUltimasMedidasMes(req, res);
+});
+
 router.get("/tempo-real/:token", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 })

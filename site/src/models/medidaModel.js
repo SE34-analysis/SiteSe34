@@ -33,6 +33,20 @@ function buscarUltimasMedidas(token, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function buscarUltimasMedidasMes(token) {
+
+    instrucaoSql = ''
+        instrucaoSql = `SELECT umi AS umidade, temp AS temperatura, DATE_FORMAT(dtHora, '%M') AS momento_grafico, fkSensor
+        FROM leitura
+        JOIN sensor ON idSensor = fkSensor
+        WHERE fkempresa = ${token}
+        GROUP BY umidade, temperatura, momento_grafico, fkSensor
+        ORDER BY umidade DESC
+        LIMIT 30;`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 function buscarMedidasEmTempoReal(token) {
 
@@ -110,6 +124,7 @@ module.exports = {
     buscarUltimasMedidas,
     buscarQtdCaminhao,
     buscarTipoCaminhao,
+    buscarUltimasMedidasMes,
     buscarStatSensor,
     buscarStatSensorCam,
     buscarMedidasEmTempoReal
