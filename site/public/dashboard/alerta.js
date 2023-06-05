@@ -52,7 +52,7 @@ painel_geral.innerHTML = ''
         grauDeAvisoCor = 'cor-alerta perigo-quente'
         kpi.style.color = '#FF4929'
         kpi4.style.color = '#FF4929'
-        alertC1.style.color = '#FF4929'
+
         alertC2.style.color = '#FF4929'
         kpi4.innerHTML ='Crítico'
         painel_geral.innerHTML = `<p> <b> Crítico!</b><br> O caminhão <b>A2</b> está precisando de Supervisão, pois o estado está crítico, fazer
@@ -67,7 +67,7 @@ painel_geral.innerHTML = ''
         grauDeAvisoCor = 'cor-alerta alerta-quente'
         kpi.style.color = '#ffee58'
         kpi4.style.color = '#ffee58'
-        alertC1.style.color = '#ffee58'
+
         alertC2.style.color = '#ffee58'
         kpi4.innerHTML ='Alerta'
         painel_geral.innerHTML = `<p> <b> Atenção!</b><br> O caminhão <b>A2</b> está precisando de Supervisão,
@@ -79,7 +79,6 @@ painel_geral.innerHTML = ''
         kpi.style.color = '#83F46B'
         kpi4.style.color = '#83F46B'
         kpi4.innerHTML ='Ideal'
-        alertC1.style.color ='#83F46B'
         alertC2.style.color ='#83F46B'
         painel_geral.innerHTML = `<p><b>Tudo Normal</b><br>Os caminhãoes estão com as tempraturas ideias</p>`;
         removerAlerta(token);
@@ -91,7 +90,6 @@ painel_geral.innerHTML = ''
         kpi.style.color = '#f09e24'
         kpi4.style.color = '#f09e24'
         kpi4.innerHTML ='Alerta'
-        alertC1.style.color ='#f09e24'
         alertC2.style.color ='#f09e24'
         painel_geral.innerHTML = `<p><b>Atenção!</b><br> O caminhão <b>A2</b> está precisando de Supervisão,
         pois o estado está em Alerta, ficar de olho para a temperatura não diminuir demais.</p>`;
@@ -103,7 +101,6 @@ painel_geral.innerHTML = ''
         grauDeAvisoCor = 'cor-alerta perigo-frio'
         kpi.style.color = '#d65230'
         kpi4.style.color = '#d65230'
-        alertC1.style.color ='#d65230'
         alertC2.style.color ='#d65230'
         kpi4.innerHTML ='Crítico'
         exibirAlerta(temp, token, grauDeAviso, grauDeAvisoCor)
@@ -335,7 +332,7 @@ function transformarEmDiv2({ token, umi, grauDeAviso, grauDeAvisoCor }) {
     return `<div class="mensagem-alarme">
     <div class="informacao">
     <div class="${grauDeAvisoCor}">&#12644;</div> 
-     <h3>Caminhão 1 está em estado de ${grauDeAviso}!</h3>
+     <h3>Caminhão A${token/1000} está em estado de ${grauDeAviso}!</h3>
     <small>Umidade ${umi}.</small>   
     </div>
     <div class="alarme-sino"></div>
