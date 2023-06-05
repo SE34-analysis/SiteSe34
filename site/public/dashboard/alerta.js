@@ -44,7 +44,7 @@ function alertar(resposta, token) {
      var alertC2 = document.getElementById('C2');
 var painel_geral = document.getElementById('painel_geral');
 
-
+painel_geral.innerHTML = ''
 
     if (temp >= limites.muito_quente) {
         classe_temperatura = 'cor-alerta perigo-quente';
@@ -175,7 +175,7 @@ function transformarEmDiv({ token, temp, grauDeAviso, grauDeAvisoCor }) {
     return `<div class="mensagem-alarme">
     <div class="informacao">
     <div class="${grauDeAvisoCor}">&#12644;</div> 
-     <h3>Caminhão 1 está em estado de ${grauDeAviso}!</h3>
+     <h3>Caminhão A${token /1000} está em estado de ${grauDeAviso}!</h3>
     <small>Temperatura ${temp}.</small>   
     </div>
     <div class="alarme-sino"></div>
@@ -335,7 +335,11 @@ function transformarEmDiv2({ token, umi, grauDeAviso, grauDeAvisoCor }) {
     return `<div class="mensagem-alarme">
     <div class="informacao">
     <div class="${grauDeAvisoCor}">&#12644;</div> 
+<<<<<<< HEAD
+     <h3>Caminhão A${token /1000} está em estado de ${grauDeAviso}!</h3>
+=======
      <h3>Caminhão 1 está em estado de ${grauDeAviso}!</h3>
+>>>>>>> 45d8f28ca68567e8e0c7667db92263c765931529
     <small>Umidade ${umi}.</small>   
     </div>
     <div class="alarme-sino"></div>
