@@ -44,7 +44,7 @@ function alertar(resposta, token) {
      var alertC2 = document.getElementById('C2');
 var painel_geral = document.getElementById('painel_geral');
 
-
+painel_geral.innerHTML = ''
 
     if (temp >= limites.muito_quente) {
         classe_temperatura = 'cor-alerta perigo-quente';
