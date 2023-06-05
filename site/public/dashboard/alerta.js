@@ -5,7 +5,7 @@ var alertas = [];
 
   
 function obterdados2(token){
-fetch(`/medidas/ultimas/${token}`)
+fetch(`/medidas/tempo-real/${token}`)
 .then(resposta => {
     if (resposta.ok) {
         resposta.json().then(resposta =>{
@@ -194,7 +194,7 @@ function transformarEmDiv({ token, temp, grauDeAviso, grauDeAvisoCor }) {
 
   
 function obterdados3(token){
-fetch(`/medidas/ultimas/${token}`)
+fetch(`/medidas/tempo-real/${token}`)
 .then(resposta => {
     if (resposta.ok) {
         resposta.json().then(resposta =>{

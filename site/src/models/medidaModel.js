@@ -6,7 +6,6 @@ function buscarUltimasMedidas(token, limite_linhas) {
         instrucaoSql = `select 
         umi as umidade,
         temp as temperatura, 
-                    dtHora,
                         DATE_FORMAT(dtHora,'%H:%i:%s') as momento_grafico
                     from leitura 
 						join sensor on idSensor = fkSensor
@@ -16,40 +15,22 @@ function buscarUltimasMedidas(token, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+// function buscarUltimasMedidasMes(token) {
 
-function buscarUltimasMedidas(token, limite_linhas) {
+//     instrucaoSql = ''
+//         instrucaoSql = `SELECT umi AS umidade, temp AS temperatura, DATE_FORMAT(dtHora, '%M') AS momento_grafico, fkSensor
+//         FROM leitura
+//         JOIN sensor ON idSensor = fkSensor
+//         WHERE fkempresa = ${token}
+//         GROUP BY umidade, temperatura, momento_grafico, fkSensor
+//         ORDER BY umidade DESC
+//         LIMIT 30;`;
 
-    instrucaoSql = ''
-        instrucaoSql = `select 
-        umi as umidade,
-        temp as temperatura, 
-                    dtHora,
-                        DATE_FORMAT(dtHora,'%H:%i:%s') as momento_grafico
-                    from leitura 
-						join sensor on idSensor = fkSensor
-                    where fkempresa = ${token}
-                    order by idTempUmi desc limit ${limite_linhas};`;
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-function buscarUltimasMedidasMes(token) {
-
-    instrucaoSql = ''
-        instrucaoSql = `SELECT umi AS umidade, temp AS temperatura, DATE_FORMAT(dtHora, '%M') AS momento_grafico, fkSensor
-        FROM leitura
-        JOIN sensor ON idSensor = fkSensor
-        WHERE fkempresa = ${token}
-        GROUP BY umidade, temperatura, momento_grafico, fkSensor
-        ORDER BY umidade DESC
-        LIMIT 30;`;
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
+//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+//     return database.executar(instrucaoSql);
+// }
 
 function buscarMedidasEmTempoReal(token) {
-
     instrucaoSql = ''
 
         instrucaoSql = `select 
@@ -59,7 +40,7 @@ function buscarMedidasEmTempoReal(token) {
                         fkSensor
                     from leitura 
 						join sensor on idSensor = fkSensor
-                    where fkempresa = ${token}
+                    where fkempresa = 2000
                     order by idTempUmi desc limit 1;`
                     
 
@@ -124,7 +105,7 @@ module.exports = {
     buscarUltimasMedidas,
     buscarQtdCaminhao,
     buscarTipoCaminhao,
-    buscarUltimasMedidasMes,
+    // buscarUltimasMedidasMes,
     buscarStatSensor,
     buscarStatSensorCam,
     buscarMedidasEmTempoReal
