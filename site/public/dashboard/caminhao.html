@@ -360,7 +360,6 @@
     buscarQtdCaminhao();
   buscarStatSensorCam();
   buscarTipoCaminhao();
-  buscarUltimasMedidasMes();
     // obterDadosGrafico(3)
     // obterDadosGrafico(4)
   }
@@ -434,12 +433,28 @@
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
+
+    fetch(`/medidas/ultimas2/${token}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarGrafico(resposta2, token);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
   }
 
   // // // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
   // // // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
   // // // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-  function plotarGrafico(resposta, token) {
+  function plotarGrafico(resposta, resposta2, token) {
 
     console.log('iniciando plotagem do gráfico...');
 
@@ -537,8 +552,8 @@
     console.log(resposta)
 
     // Inserindo valores recebidos em estrutura para plotar o gráfico
-    for (i = 0; i < resposta.length; i++) {
-      var registro = resposta[i];
+    for (i = 0; i < resposta2.length; i++) {
+      var registro = resposta2[i];
       labels.push(registro.momento_grafico);
       dados2.datasets[0].data.push(registro.umidade);
       dados2.datasets[1].data.push(registro.temperatura);
@@ -826,27 +841,5 @@
 
     return false;
   }
-  function buscarUltimasMedidasMes(token) {
-
-if (proximaAtualizacao != undefined) {
-  clearTimeout(proximaAtualizacao);
-}
-
-fetch(`/medidas/ultimas2/${token}`, { cache: 'no-store' }).then(function (response) {
-  if (response.ok) {
-    response.json().then(function (resposta) {
-      console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-      resposta.reverse();
-
-      plotarGraficomes(resposta, token);
-    });
-  } else {
-    console.error('Nenhum dado encontrado ou erro na API');
-  }
-})
-  .catch(function (error) {
-    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-  });
-}
 
 </script>
